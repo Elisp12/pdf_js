@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <title>Gráfico de Barra Dupla Escalonado com Tamanho Máximo</title>
+    <style>
+        /* Estilo básico do gráfico */
+        .bar-container {
+        display: flex;
+        justify-content: space-around;
+        height: 300px; /* Altura máxima do gráfico */
+        width: 600px;
+        border: 1px solid #ccc;
+        margin-top: 20px;
+        }
+
+        /* Contêiner individual de barras e label */
+        .bar-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end; /* Alinhamento ao fundo */
+        height: 100%;
+        }
+
+        /* Contêiner para barras duplas */
+        .bar-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        }
+
+        .bar {
+        width: 30px;
+        text-align: center;
+        color: white;
+        padding-top: 5px;
+        }
+
+        .bar-label {
+        margin-top: 10px;
+        text-align: center;
+        }
+
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+            }
+        
+            #content {
+                font-size: 12pt; /* Ajuste o tamanho da fonte */
+                color: black; /* Garanta que o texto seja legível */
+            }
+        
+            /* Esconder elementos que não devem aparecer no PDF */
+            #gerar_pdf {
+                display: none; /* Oculta o botão de gerar PDF */
+            }
+        
+            /* Outros ajustes de layout */
+            header, footer {
+                display: none; /* Oculta cabeçalhos e rodapés, se necessário */
+            }
+        
+            /* Ajustar margens */
+            @page {
+                margin: 10mm; /* Margens específicas para impressão */
+            }
+        }
+    
+    </style>
+    </head>
+    <body>
+
+        <div class="container" id="content">
+            <h2>Gráfico de Barra Dupla Escalonado</h2>
+            
+            <!-- Contêiner para o gráfico de barras -->
+            <div class="bar-container" id="barChart"></div>
+
+            <img class="img_" src="/image.jpg" alt="">
+            <p>Português Հայերեն Shqip ‫العربية Български Català 中文简体 Hrvatski Česky Dansk Nederlands English Eesti Filipino Suomi Français ქართული Deutsch Ελληνικά ‫עברית हिन्दी Magyar Indonesia Italiano Latviski Lietuviškai македонски Melayu Norsk Polski Português Româna Pyccкий Српски Slovenčina Slovenščina Español Svenska ไทย Türkçe Українська Tiếng Việt
+                Lorem Ipsum
+                "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
+                "Não há ninguém que ame a dor por si só, que a busque e queira tê-la, simplesmente por ser dor..."
+                 
+                 
+                
+                freestar
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis eros quis dignissim volutpat. Aliquam eget ante vestibulum, bibendum massa dapibus, scelerisque nisl. In efficitur est vitae ligula vulputate, a consequat neque vestibulum. Morbi suscipit, tortor in aliquet suscipit, quam nunc iaculis magna, in sollicitudin velit dui vitae ex. Quisque euismod velit et lacinia tempor. Proin pulvinar nunc et risus venenatis, at congue erat facilisis. Donec vulputate orci sed efficitur dictum. Quisque aliquam eu erat quis placerat.
+                
+                Pellentesque mauris sapien, ornare sed faucibus vel, malesuada non turpis. Donec eleifend tristique turpis, vel scelerisque justo suscipit quis. Mauris congue erat volutpat, dictum lorem nec, accumsan odio. Cras posuere magna sem, eu egestas nulla iaculis id. Aliquam non porta tellus. Sed maximus blandit diam accumsan hendrerit. Integer laoreet turpis id justo euismod lobortis. Phasellus gravida nunc luctus varius dictum. Integer ut odio vel augue bibendum facilisis et eu lacus.
+                
+                Etiam ac dolor id mauris volutpat ultricies. Mauris metus nulla, porta eget orci sed, rhoncus commodo metus. In id dolor in ligula commodo semper. Phasellus sed erat vehicula, posuere risus ut, faucibus justo. Pellentesque eu sem a ex egestas dignissim. Morbi ligula elit, pellentesque quis blandit quis, finibus a purus. Donec facilisis diam sit amet lectus porttitor luctus. Pellentesque nunc urna, pulvinar vitae elementum non, semper sit amet nisi. Ut fringilla ipsum a risus imperdiet porta eget at purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dapibus libero eros, ac tincidunt velit feugiat at. Mauris malesuada ut nulla at commodo. Nulla accumsan, libero in semper aliquam, dolor sem ultricies lectus, rhoncus ultrices justo urna non est.
+                
+                In suscipit malesuada augue, quis auctor massa euismod sit amet. Proin vulputate suscipit sem. In aliquet id diam ut elementum. Aliquam venenatis hendrerit arcu et malesuada. Curabitur sit amet velit ut purus varius auctor vulputate quis velit. Fusce venenatis mollis lorem vitae tempus. Maecenas sit amet velit id lorem tristique mollis ac sit amet diam. Sed fermentum scelerisque ipsum, vitae varius nunc hendrerit quis.
+                
+                Maecenas convallis tellus ut tempor bibendum. Aenean ut hendrerit magna, sed ullamcorper neque. Donec imperdiet facilisis lacinia. Aenean rutrum vitae sem at consequat. Aliquam arcu arcu, dignissim nec neque id, tristique feugiat purus. Quisque id tempor arcu. Nullam tincidunt id mauris vehicula pharetra. In imperdiet tempus est in feugiat. Nunc eu turpis sed tellus gravida viverra id vitae massa. Aliquam ultricies volutpat molestie. Nulla sodales vel velit eu rutrum.
+                
+                Foram gerados 5 parágrafos, 398 palavras e 2686 bytes de Lorem Ipsum</p>
+            <img class="img_" src="/image.jpg" alt="">
+            <p>Português Հայերեն Shqip ‫العربية Български Català 中文简体 Hrvatski Česky Dansk Nederlands English Eesti Filipino Suomi Français ქართული Deutsch Ελληνικά ‫עברית हिन्दी Magyar Indonesia Italiano Latviski Lietuviškai македонски Melayu Norsk Polski Português Româna Pyccкий Српски Slovenčina Slovenščina Español Svenska ไทย Türkçe Українська Tiếng Việt
+                Lorem Ipsum
+                "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
+                "Não há ninguém que ame a dor por si só, que a busque e queira tê-la, simplesmente por ser dor..."
+                 
+                 
+                
+                freestar
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis eros quis dignissim volutpat. Aliquam eget ante vestibulum, bibendum massa dapibus, scelerisque nisl. In efficitur est vitae ligula vulputate, a consequat neque vestibulum. Morbi suscipit, tortor in aliquet suscipit, quam nunc iaculis magna, in sollicitudin velit dui vitae ex. Quisque euismod velit et lacinia tempor. Proin pulvinar nunc et risus venenatis, at congue erat facilisis. Donec vulputate orci sed efficitur dictum. Quisque aliquam eu erat quis placerat.
+                
+                Pellentesque mauris sapien, ornare sed faucibus vel, malesuada non turpis. Donec eleifend tristique turpis, vel scelerisque justo suscipit quis. Mauris congue erat volutpat, dictum lorem nec, accumsan odio. Cras posuere magna sem, eu egestas nulla iaculis id. Aliquam non porta tellus. Sed maximus blandit diam accumsan hendrerit. Integer laoreet turpis id justo euismod lobortis. Phasellus gravida nunc luctus varius dictum. Integer ut odio vel augue bibendum facilisis et eu lacus.
+                
+                Etiam ac dolor id mauris volutpat ultricies. Mauris metus nulla, porta eget orci sed, rhoncus commodo metus. In id dolor in ligula commodo semper. Phasellus sed erat vehicula, posuere risus ut, faucibus justo. Pellentesque eu sem a ex egestas dignissim. Morbi ligula elit, pellentesque quis blandit quis, finibus a purus. Donec facilisis diam sit amet lectus porttitor luctus. Pellentesque nunc urna, pulvinar vitae elementum non, semper sit amet nisi. Ut fringilla ipsum a risus imperdiet porta eget at purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dapibus libero eros, ac tincidunt velit feugiat at. Mauris malesuada ut nulla at commodo. Nulla accumsan, libero in semper aliquam, dolor sem ultricies lectus, rhoncus ultrices justo urna non est.
+                
+                In suscipit malesuada augue, quis auctor massa euismod sit amet. Proin vulputate suscipit sem. In aliquet id diam ut elementum. Aliquam venenatis hendrerit arcu et malesuada. Curabitur sit amet velit ut purus varius auctor vulputate quis velit. Fusce venenatis mollis lorem vitae tempus. Maecenas sit amet velit id lorem tristique mollis ac sit amet diam. Sed fermentum scelerisque ipsum, vitae varius nunc hendrerit quis.
+                
+                Maecenas convallis tellus ut tempor bibendum. Aenean ut hendrerit magna, sed ullamcorper neque. Donec imperdiet facilisis lacinia. Aenean rutrum vitae sem at consequat. Aliquam arcu arcu, dignissim nec neque id, tristique feugiat purus. Quisque id tempor arcu. Nullam tincidunt id mauris vehicula pharetra. In imperdiet tempus est in feugiat. Nunc eu turpis sed tellus gravida viverra id vitae massa. Aliquam ultricies volutpat molestie. Nulla sodales vel velit eu rutrum.
+                
+                Foram gerados 5 parágrafos, 398 palavras e 2686 bytes de Lorem Ipsum</p>
+            <img class="img_" src="/image.jpg" alt="">  
+            <p>Português Հայերեն Shqip ‫العربية Български Català 中文简体 Hrvatski Česky Dansk Nederlands English Eesti Filipino Suomi Français ქართული Deutsch Ελληνικά ‫עברית हिन्दी Magyar Indonesia Italiano Latviski Lietuviškai македонски Melayu Norsk Polski Português Româna Pyccкий Српски Slovenčina Slovenščina Español Svenska ไทย Türkçe Українська Tiếng Việt
+                Lorem Ipsum
+                "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
+                "Não há ninguém que ame a dor por si só, que a busque e queira tê-la, simplesmente por ser dor..."
+                 
+                 
+                
+                freestar
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis eros quis dignissim volutpat. Aliquam eget ante vestibulum, bibendum massa dapibus, scelerisque nisl. In efficitur est vitae ligula vulputate, a consequat neque vestibulum. Morbi suscipit, tortor in aliquet suscipit, quam nunc iaculis magna, in sollicitudin velit dui vitae ex. Quisque euismod velit et lacinia tempor. Proin pulvinar nunc et risus venenatis, at congue erat facilisis. Donec vulputate orci sed efficitur dictum. Quisque aliquam eu erat quis placerat.
+                
+                Pellentesque mauris sapien, ornare sed faucibus vel, malesuada non turpis. Donec eleifend tristique turpis, vel scelerisque justo suscipit quis. Mauris congue erat volutpat, dictum lorem nec, accumsan odio. Cras posuere magna sem, eu egestas nulla iaculis id. Aliquam non porta tellus. Sed maximus blandit diam accumsan hendrerit. Integer laoreet turpis id justo euismod lobortis. Phasellus gravida nunc luctus varius dictum. Integer ut odio vel augue bibendum facilisis et eu lacus.
+                
+                Etiam ac dolor id mauris volutpat ultricies. Mauris metus nulla, porta eget orci sed, rhoncus commodo metus. In id dolor in ligula commodo semper. Phasellus sed erat vehicula, posuere risus ut, faucibus justo. Pellentesque eu sem a ex egestas dignissim. Morbi ligula elit, pellentesque quis blandit quis, finibus a purus. Donec facilisis diam sit amet lectus porttitor luctus. Pellentesque nunc urna, pulvinar vitae elementum non, semper sit amet nisi. Ut fringilla ipsum a risus imperdiet porta eget at purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dapibus libero eros, ac tincidunt velit feugiat at. Mauris malesuada ut nulla at commodo. Nulla accumsan, libero in semper aliquam, dolor sem ultricies lectus, rhoncus ultrices justo urna non est.
+                
+                In suscipit malesuada augue, quis auctor massa euismod sit amet. Proin vulputate suscipit sem. In aliquet id diam ut elementum. Aliquam venenatis hendrerit arcu et malesuada. Curabitur sit amet velit ut purus varius auctor vulputate quis velit. Fusce venenatis mollis lorem vitae tempus. Maecenas sit amet velit id lorem tristique mollis ac sit amet diam. Sed fermentum scelerisque ipsum, vitae varius nunc hendrerit quis.
+                
+                Maecenas convallis tellus ut tempor bibendum. Aenean ut hendrerit magna, sed ullamcorper neque. Donec imperdiet facilisis lacinia. Aenean rutrum vitae sem at consequat. Aliquam arcu arcu, dignissim nec neque id, tristique feugiat purus. Quisque id tempor arcu. Nullam tincidunt id mauris vehicula pharetra. In imperdiet tempus est in feugiat. Nunc eu turpis sed tellus gravida viverra id vitae massa. Aliquam ultricies volutpat molestie. Nulla sodales vel velit eu rutrum.
+                
+                Foram gerados 5 parágrafos, 398 palavras e 2686 bytes de Lorem Ipsum</p>
+
+                <img class="img_" src="/image.jpg" alt="">
+                <img class="img_" src="/image.jpg" alt="">
+                <img class="img_" src="/image.jpg" alt="">
+        </div>
+    
+        <button id="gerar_pdf">Gerar pdf</button>
+
+    <script>
+        // Dados para o gráfico com dois conjuntos de valores
+        const data = [
+            { label: "Jan", value1: 40, value2: 60 },
+            { label: "Feb", value1: 50, value2: 30 },
+            { label: "Mar", value1: 80, value2: 70 },
+            { label: "Apr", value1: 20, value2: 50 },
+            { label: "May", value1: 100, value2: 90 }
+        ];
+    
+        // Cores para os dois conjuntos de barras
+        const colors = ['#72BF78', '#0071FF'];
+    
+        // Definir o valor máximo que o gráfico deve representar (tamanho máximo das barras)
+        const maxHeight = 150; // altura máxima em pixels para a barra mais alta
+        const maxValue = Math.max(...data.map(item => Math.max(item.value1, item.value2)));  // Calcula o maior valor dos dois conjuntos
+    
+        // Função para criar o gráfico de barras
+        function createBarChart(data) {
+            const chartContainer = document.getElementById('barChart');
+            
+            data.forEach(item => {
+            // Criar contêiner da barra e do label
+            const barWrapper = document.createElement('div');
+            barWrapper.classList.add('bar-wrapper');
+    
+            // Contêiner para as barras duplas
+            const barGroup = document.createElement('div');
+            barGroup.classList.add('bar-group');
+    
+            // Criar primeira barra
+            const bar1 = document.createElement('div');
+            bar1.classList.add('bar');
+            const barHeight1 = (item.value1 / maxValue) * maxHeight;
+            bar1.style.height = barHeight1 + 'px'; // Definir altura proporcional
+            bar1.style.backgroundColor = colors[0]; // Cor do primeiro conjunto
+            bar1.innerHTML = item.value1; // Exibir o valor
+    
+            // Criar segunda barra
+            const bar2 = document.createElement('div');
+            bar2.classList.add('bar');
+            const barHeight2 = (item.value2 / maxValue) * maxHeight;
+            bar2.style.height = barHeight2 + 'px'; // Definir altura proporcional
+            bar2.style.backgroundColor = colors[1]; // Cor do segundo conjunto
+            bar2.innerHTML = item.value2; // Exibir o valor
+    
+            // Adicionar as barras ao grupo
+            barGroup.appendChild(bar1);
+            barGroup.appendChild(bar2);
+    
+            // Adicionar o grupo de barras ao contêiner de barra
+            barWrapper.appendChild(barGroup);
+    
+            // Adicionar rótulo abaixo das barras
+            const label = document.createElement('div');
+            label.classList.add('bar-label');
+            label.innerHTML = item.label;
+            barWrapper.appendChild(label);
+    
+            // Adicionar o contêiner da barra no contêiner principal
+            chartContainer.appendChild(barWrapper);
+            });
+        }
+    
+        // Chama a função para criar o gráfico
+        createBarChart(data);
+        </script>
+
+    <script>
+        
+        document.getElementById("gerar_pdf").addEventListener("click", gerarPDF);
+
+        function gerarPDF() {
+            const { jsPDF } = window.jspdf;
+
+            html2canvas(document.querySelector("#content"))
+                .then(function(canvas) {
+                    const imgData = canvas.toDataURL('image/png');
+                    const pdf = new jsPDF('p', 'mm', 'a4');
+
+                    const margin = 10; // Margem em mm
+                    const imgWidth = 210 - (2 * margin); // Largura útil (A4 menos margens)
+                    const pageHeight = 297; // Altura A4 em mm
+                    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+                    let position = margin; // Posição inicial (margem superior)
+
+                    // Adiciona a imagem ao PDF
+                    pdf.addImage(imgData, 'PNG', margin, position, imgWidth, imgHeight); // Margem esquerda
+
+                    // Verifica se a altura da imagem excede a altura da página
+                    if (imgHeight > pageHeight - (2 * margin)) { // Considera margem superior e inferior
+                        let remainingHeight = imgHeight - (pageHeight - (2 * margin));
+                        let pageCount = Math.ceil(remainingHeight / (pageHeight - (2 * margin))); // Margens incluídas
+
+                        for (let i = 0; i < pageCount; i++) {
+                            pdf.addPage(); // Adiciona uma nova página
+
+                            // Calcula a nova posição
+                            position = (i === 0) ? -(pageHeight - (2 * margin)) : position - (pageHeight - (2 * margin));
+
+                            // Adiciona a imagem, ajustando a posição
+                            pdf.addImage(imgData, 'PNG', margin, position, imgWidth, imgHeight);
+                        }
+                    }
+
+                    pdf.save("relatorio.pdf"); // Salva o PDF
+                })
+                .catch(function(error) {
+                    console.error("Erro ao gerar o PDF:", error);
+                });
+        }
+
+
+    </script>
+</body>
+</html>
